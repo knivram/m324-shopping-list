@@ -58,8 +58,8 @@ jobs:
           restore-keys: |
             node-modules-
 
-      - name: Run ESLint
-        run: npm run lint
+      - name: Run ESLint (strict)
+        run: npm run lint:strict
 
   test:
     name: Test
