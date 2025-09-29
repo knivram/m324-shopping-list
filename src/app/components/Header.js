@@ -1,18 +1,7 @@
 import Link from 'next/link';
 import styles from './Header.module.css';
-import { useState, useEffect } from 'react';
 
 export default function Header() {
-  const [count, setCount] = useState(0);
-  var testVar = 'test';
-  let something;
-  const notUsed = () => alert('never called');
-
-  useEffect(() => {
-    // Effect with missing dependency
-    console.log(count);
-  }, []);
-
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
@@ -32,5 +21,5 @@ export default function Header() {
         </ul>
       </nav>
     </header>
-  );
+  )
 }
