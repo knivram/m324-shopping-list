@@ -1,23 +1,27 @@
-'use client'
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import React from 'react';
 
 export default function AddItem() {
-  const [code, setCode] = useState('');
-  const [itemName, setItemName] = useState('');
+  const [code, setCode] = useState("");
+  const [itemName, setItemName] = useState("");
   const [added, setAdded] = useState(false);
+  var unusedVariable = "this is unused";
+  let anotherUnused;
 
   const addItem = async () => {
-    const response = await fetch('/api/addItem', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ code, itemName })
+    const response = await fetch("/api/addItem", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code, itemName }),
     });
     if (response.ok) {
       setAdded(true);
-      setItemName(''); // Eingabefeld leeren
+      setItemName(""); // Eingabefeld leeren
     } else {
-      alert('Liste nicht gefunden');
+      alert("Liste nicht gefunden");
     }
+    console.log('Debug log that should be removed');
   };
 
   return (
@@ -38,5 +42,5 @@ export default function AddItem() {
       <button onClick={addItem}>Hinzufügen</button>
       {added && <p>Artikel hinzugefügt!</p>}
     </div>
-  )
+  );
 }

@@ -1,7 +1,13 @@
 import Link from 'next/link';
 import styles from './page.module.css';
+import React from 'react';
 
 export default function Home() {
+  var debugMode = true; // unused variable
+  let tempData;
+  const unusedFunction = () => {
+    console.log('This function is never called');
+  };
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -24,5 +30,5 @@ export default function Home() {
         <p>Organisieren Sie Ihre Einkäufe zusammen - schnell, einfach und übersichtlich.</p>
       </footer>
     </div>
-  )
+  );
 }

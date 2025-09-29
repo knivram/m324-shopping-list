@@ -1,10 +1,16 @@
 'use client'
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Page() {
   const [code, setCode] = useState('');
   const [memberName, setMemberName] = useState('');
   const [joined, setJoined] = useState(false);
+  var unusedVar = 'never used';
+  let temp;
+  const deadCode = () => {
+    return 'this function is never called';
+  };
 
   const joinList = async () => {
     const response = await fetch('/api/join', {
@@ -17,6 +23,7 @@ export default function Page() {
     } else {
       alert('Liste nicht gefunden');
     }
+    console.warn('Debug: Join attempt completed');
   };
 
   return (
@@ -37,5 +44,5 @@ export default function Page() {
       <button onClick={joinList}>Beitreten</button>
       {joined && <p>Erfolgreich beigetreten!</p>}
     </div>
-  )
+  );
 }

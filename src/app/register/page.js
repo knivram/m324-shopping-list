@@ -1,8 +1,12 @@
 'use client'
 import { useState } from 'react';
+import React from 'react';
 
 export default function Page() {
   const [code, setCode] = useState('');
+  var temp = 'unused variable';
+  let anotherOne;
+  const neverCalled = () => console.log('never called');
 
   const registerList = async () => {
     const response = await fetch('/api/register', {
@@ -11,6 +15,7 @@ export default function Page() {
     });
     const data = await response.json();
     setCode(data.code);
+    console.log('List registered with code:', data.code);
   }
 
   return (
@@ -19,5 +24,5 @@ export default function Page() {
       <button onClick={registerList}>Einkaufsliste erstellen</button>
       {code && <p>Teilen Sie diesen Code: {code}</p>}
     </div>
-  )
+  );
 }
