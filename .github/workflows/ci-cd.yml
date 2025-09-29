@@ -3,8 +3,6 @@ name: CI/CD Pipeline
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
   setup:
@@ -88,8 +86,8 @@ jobs:
       - name: Run Jest tests
         run: npm run test
 
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     needs: [lint, test, setup]
 
@@ -113,27 +111,11 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: build-files
-          path: .next/
-
-  deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-files
-          path: .next/
+      - name: Check build output
+        run: |
+          echo "Checking build directory contents:"
+          ls -la .next/ || echo "No .next directory found"
+          find .next -type f | head -10 || echo "No files in .next"
 
       # Add your deployment steps here
       # Example for Vercel:
@@ -155,3 +137,4 @@ jobs:
         run: |
           echo "🚀 Deployment step - Configure this based on your hosting platform"
           echo "Available platforms: Vercel, Netlify, AWS, DigitalOcean, etc."
+          echo "Build files are ready in .next/ directory"
